@@ -5,11 +5,162 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DCS Editcdsdsdsdsor</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous">        	
+    </script>
+    <title>User Interface Display</title>
+
+     <script type = "text/javascript">
+    	$(function(){
+    		$("#dataButton").click(function(){
+
+    		$(".1 tbody tr").remove();
+    		$(".2 tbody tr").remove();
+    		$(".3 tbody tr").remove();
+    		var month = document.getElementById('month').value;
+    		var year = document.getElementById('year').value;
+    		var statesHmr
+    		var countryHmr
+
+    		$.ajax({
+        		url: 'http://localhost:8080/state/' + year + '/' + month,
+        		contentType: "application/json",
+        		dataType: 'json',
+        		success: function(result){
+            		statesHmr = result
+        		}
+    		});
+
+    		$.ajax({
+        		url: 'http://localhost:8080/country/' + year + '/' + month,
+        		contentType: "application/json",
+        		dataType: 'json',
+        		success: function(result){
+            		countryHmr = result
+            		console.log(statesHmr);
+            		console.log(countryHmr);
+            		var column1 = [];
+            		var a = 0;
+            		var column2 = [];
+            		var b = 0;
+            		var column3 = [];
+            		var c = 0;
+            		for ( i = 0; i < statesHmr['months'].length; i++ ){
+            			if ( statesHmr['months'][i]['val'] < countryHmr['45'] ) {
+            				column1[a] = statesHmr['months'][i]
+            				a++
+            			}
+            			else if ( statesHmr['months'][i]['val'] > countryHmr['60'] ) {
+            				column2[b] = statesHmr['months'][i]
+            				b++
+            			}
+            			else {
+            				column3[c] = statesHmr['months'][i]
+            				c++
+            			}
+            		}
+            		console.log(column1)
+            		console.log(column2)
+            		console.log(column3)
+
+            		for ( it1 = 0; it1 < column1.length; it1++){
+            			var markup = "<tr><td>" + column1[it1]['val'] + "</td><td>" + column1[it1]['name'] + "</td></tr>";
+            			$(".1").append(markup);
+            		}
+
+            		for ( it2 = 0; it2 < column2.length; it2++){
+            			var markup = "<tr><td>" + column2[it2]['val'] + "</td><td>" + column2[it2]['name'] + "</td></tr>";
+            			$(".2").append(markup);
+            		}
+
+            		for ( it3 = 0; it3 < column3.length; it3++){
+            			var markup = "<tr><td>" + column3[it3]['val'] + "</td><td>" + column3[it3]['name'] + "</td></tr>";
+            			$(".3").append(markup);
+            		}
+        		}
+    		});
+		});
+       });
+     </script>
 </head>
 
 <body>
-    <div id="root"></div>
+	<div style="display: inline-block;">
+    <select id='month'>
+    	<option value=''>--Select Month--</option>
+    	<option value='1'>Janaury</option>
+    	<option value='2'>February</option>
+    	<option value='3'>March</option>
+    	<option value='4'>April</option>
+    	<option value='5'>May</option>
+    	<option value='6'>June</option>
+    	<option value='7'>July</option>
+    	<option value='8'>August</option>
+    	<option value='9'>September</option>
+    	<option value='10'>October</option>
+    	<option value='11'>November</option>
+    	<option value='12'>December</option>
+    </select> 
+    </div>
+    
+	<div style="display: inline-block;" >
+        <select id='year'>
+    		<option value=''>--Select year--</option>
+    		<option value='2018'>2018</option>
+    		<option value='2019'>2019</option>
+    	</select> 
+    </div>
+    <input type="button" id="dataButton" name="dataButton" value="fetchData" /> 
+    </br>
+    </br>
+    <table class="1" style="float: left">
+        <thead>
+        	<tr>
+        		<th>less than 45</th>
+        	</tr>
+            <tr>
+                <th>States</th>
+                <th>Median HMR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            </tr>
+        </tbody>
+    </table>
+    <table class="2" style="float: left;">
+        <thead>
+        	<tr>
+        		<th>greater than 60</th>
+        	</tr>
+            <tr>
+                <th>States</th>
+                <th>Median HMR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="3" style="float: left;">
+        <thead>
+        	<tr>
+        		<th>in between</th>
+        	</tr>
+            <tr>
+                <th>States</th>
+                <th>Median HMR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            </tr>
+        </tbody>
+    </table>
+
 </body>
 
 </html>
