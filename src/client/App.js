@@ -5,15 +5,6 @@ import ReactImage from './react.png';
 export default class App extends Component {
   state = { username: "some text here" };
 
-  componentDidMount() {
-      console.log("api reached here");
-  }
-
-  //   fetch('/api/getUsername')
-  //     .then(res => res.json())
-  //     .then(user => this.setState({ username: user.username }));
-  // }
-
   render() {
     const { username } = this.state;
     return (
