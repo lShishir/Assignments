@@ -56,7 +56,7 @@ app.get('/state/:year/:month', (req, res) => {
 	res.send({ months : extractedData })
 });
 
-app.get('/home', (req,res) => {
+app.get('/', (req,res) => {
 	res.sendFile(path.join(__dirname+'../../../dist/index.html'))
 });
 
