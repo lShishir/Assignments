@@ -22,9 +22,9 @@
     		var year = document.getElementById('year').value;
     		var statesHmr
     		var countryHmr
-
+            
     		$.ajax({
-        		url: 'http://localhost:8080/state/' + year + '/' + month,
+        		url: 'https://afternoon-thicket-40232.herokuapp.com/state/' + year + '/' + month,
         		contentType: "application/json",
         		dataType: 'json',
         		success: function(result){
@@ -33,7 +33,7 @@
     		});
 
     		$.ajax({
-        		url: 'http://localhost:8080/country/' + year + '/' + month,
+        		url: 'https://afternoon-thicket-40232.herokuapp.com/country/' + year + '/' + month,
         		contentType: "application/json",
         		dataType: 'json',
         		success: function(result){
